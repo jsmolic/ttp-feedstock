@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ttp-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ttp-{{ version }}.tar.gz
   sha256: 234414f4d3039d2d1cde09993f89f8db1b34d447f76c6a402555cefac2e59c4e
 
 build:
@@ -14,15 +14,15 @@ build:
     - ttp = ttp.ttp:cli_tool
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7,<4.0
+    - python {{ python_min }}
     - poetry-core >=1.0.0
     - pip
   run:
-    - python >=3.7,<4.0
+    - python >={{ python_min }},<4.0
 
 test:
   imports:
@@ -32,6 +32,7 @@ test:
     - ttp --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/dmulyalin/ttp
