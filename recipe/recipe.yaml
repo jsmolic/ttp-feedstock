@@ -1,15 +1,15 @@
 schema_version: 1
 
 context:
-  version: "0.9.5"
+  version: 0.10.1
 
 package:
   name: ttp
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/ttp/ttp/ttp-${{ version }}.tar.gz
-  sha256: 234414f4d3039d2d1cde09993f89f8db1b34d447f76c6a402555cefac2e59c4e
+- url: https://files.pythonhosted.org/packages/source/t/ttp/ttp-${{ version }}.tar.gz
+  sha256: 9c928aeb1f2dade05419c7ecc756d62cb45857deb5cc6b1b9f2058e70f25ae59
 
 build:
   number: 0
@@ -21,7 +21,7 @@ build:
 
 requirements:
   host:
-    - python ${{ python_min }}.*
+    - python ${{ python_min }}.*,<4.0
     - poetry-core >=1.0.0
     - pip
   run:
