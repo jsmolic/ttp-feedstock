@@ -189,4 +189,5 @@ Feedstock Maintainers
 =====================
 
 * [@cousinbr](https://github.com/cousinbr/)
+* [@jsmolic](https://github.com/jsmolic/)
 
