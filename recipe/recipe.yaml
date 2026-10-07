@@ -8,13 +8,13 @@ package:
   version: ${{ version }}
 
 source:
-- url: https://files.pythonhosted.org/packages/source/t/ttp/ttp-${{ version }}.tar.gz
-  sha256: 9c928aeb1f2dade05419c7ecc756d62cb45857deb5cc6b1b9f2058e70f25ae59
+  url: https://github.com/dmulyalin/ttp/archive/refs/tags/${{ version }}.tar.gz
+  sha256: e501c511bef8e09a095e488bd1813274cb80360919bc19194918d5bf7a35cbb9
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
   python:
     entry_points:
       - ttp = ttp.ttp:cli_tool
@@ -38,9 +38,23 @@ tests:
   - requirements:
       run:
         - pip
+        - pytest
+        - cerberus
+        - deepdiff
+        - jinja2
+        - openpyxl
+        - pyyaml
         - python ${{ python_min }}.*
+        - tabulate
+    files:
+      source:
+        - Data
+        - test
     script:
       - ttp --help
+      - cd test/pytest
+      # Optional yangson/ttp_templates packages are unavailable from conda-forge;
+      - pytest -vvv -k 'not yangson and not test_adding_data_from_files and not test_loading_template_from_ttp_templates'
 
 about:
   summary: Template Text Parser
