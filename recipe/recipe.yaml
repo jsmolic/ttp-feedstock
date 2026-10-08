@@ -53,8 +53,9 @@ tests:
     script:
       - ttp --help
       - cd test/pytest
-      # Optional yangson/ttp_templates packages are unavailable from conda-forge;
-      - pytest -vvv -k 'not yangson and not test_adding_data_from_files and not test_loading_template_from_ttp_templates'
+      # Skip tests requiring unavailable yangson/ttp_templates packages, and tests
+      # whose expected input-file order depends on filesystem directory enumeration.
+      - pytest -vvv -k 'not yangson and not test_loading_template_from_ttp_templates and not test_adding_data_from_files and not test_inputs_url_filters_extensions and not test_group_inputs and not test_inputs_with_template_base_path'
 
 about:
   summary: Template Text Parser
